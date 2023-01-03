@@ -1,0 +1,6 @@
+name,type,age,id,position,yearsExp,employeeRating,wage,sickDayCount,OR
+name,type,age,position,storeRating,email
+Jose Robles,EMPLOYEE_CLASS,21,1111,CASHIER,1,4.3,17,3,
+Shawn Carrothers,EMPLOYEE_CLASS,21,1112,CASHIER,1,4.0,17,5,
+Danny Hensley,MANAGER_CLASS,20,1113,MANAGER,3,4.7,34,14,
+Cooper Lappenbusch,CUSTOMER_CLASS,21,3.8,cooperL100@gmail.com,
