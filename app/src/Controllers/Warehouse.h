@@ -22,7 +22,6 @@ class Warehouse {
       this->init_warehouse(); 
     }
 
-
     // Getters
     int get_total_item_count() {return this->totalItemCount; }; 
     double get_total_item_value() {return this->totalItemValue; }; 

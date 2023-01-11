@@ -1,6 +1,18 @@
 #pragma once
 #include "./StoreSupervisor.h"
 
+void remove_item_wrapper(Customer *customer); 
+
+
+class CampaignDataRoot {
+  object CampaignDataLoad
+    object Campaigns
+      List<>
+        Campaign
+        
+}
+
+
 class AppSupervisor {
   public: 
     AppSupervisor() {
@@ -15,6 +27,7 @@ class AppSupervisor {
     Person * get_person_from_user(); 
     void display_menu(int personType);
     void display_customer_menu();  
+    void manage_customer_cart_menu(Customer *customer); 
     void display_employee_menu();  
     void display_manager_menu();  
 
@@ -89,11 +102,11 @@ void AppSupervisor::display_customer_menu() {
     while (true) {
       cout << "Logged in as: " << name << endl; 
       cout << "///////////////////////////" << endl; 
-      cout << "1. Browse Store Items\n2. Checkout\n3. Leave a review\n4. Quit\n";
+      cout << "1. Browse Store Items\n2. Checkout\n3. Leave a review\n4. Manage Cart\n5. Quit\n";
       int numInput; cin >> numInput; 
-      if (numInput >= 1 && numInput <= 4)
+      if (numInput >= 1 && numInput <= 5)
         return numInput; 
-      cout << "Please enter a valid integer 1-4" << endl;
+      cout << "Please enter a valid integer 1-5" << endl;
       cin.clear(); cin.ignore(123, '\n'); cin.get(); 
       system("cls"); 
     }
@@ -112,15 +125,60 @@ void AppSupervisor::display_customer_menu() {
         customer->checkout(); 
         break; 
       case 3:
-        customer->leave_review();   
+        customer->leave_review(this->store->get_people());   
         break; 
       case 4:
-        return;  
+        manage_customer_cart_menu(customer); 
         break; 
+      case 5: 
+        return;
+        break;  
       default: 
         break; 
     }    
   }
+}
+
+void AppSupervisor::manage_customer_cart_menu(Customer *customer) { 
+  auto prompt_user = []() {
+    while (true) { 
+      cout << "1. View Cart\n2. Remove Item\n3. Quit\n"; 
+      int numInput; cin >> numInput; 
+      if (numInput >=1 && numInput <=3)
+        return numInput;
+      cout << "Please enter a valid integer 1-3" << endl;
+      cin.clear(); cin.ignore(123, '\n'); cin.get(); 
+      system("cls"); 
+    }
+  };
+
+  while(true) {
+    int numInput = prompt_user(); 
+    switch(numInput) {
+      case 1: 
+        customer->view_cart(); 
+        break; 
+      case 2: 
+        remove_item_wrapper(customer); 
+        break; 
+      case 3:
+        return; 
+        break; 
+      default: 
+        break; 
+    }
+  }
+}
+
+void remove_item_wrapper(Customer *customer) {
+  if (customer->get_shopping_cart()->get_items().size() <= 0) {
+    cout << "Error: Cannot remove - no items in cart\n"; 
+    return; 
+  }
+  customer->view_cart(); 
+  cout << "Select an item above: ";
+  int option; cin >> option; 
+  customer->remove_item_from_cart(option);   
 }
 
 void AppSupervisor::display_employee_menu() {

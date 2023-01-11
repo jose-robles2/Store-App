@@ -77,8 +77,8 @@ void StoreSupervisor::create_people_records() {
     string name = currentRecord[0], personType = currentRecord[1]; int age = stoi(currentRecord[2]); 
 
     if (personType == "CUSTOMER_CLASS") {
-      double storeRating = stold(currentRecord[3]); string email = currentRecord[4]; 
-      p = new Customer(name, CUSTOMER_CLASS, age, storeRating, email); 
+      double storeRating = stold(currentRecord[3]); string email = currentRecord[4]; double budget = stold(currentRecord[5]); 
+      p = new Customer(name, CUSTOMER_CLASS, age, storeRating, email, budget); 
       this->customerCount +=1;  
     }
     else {
@@ -103,10 +103,11 @@ void StoreSupervisor::create_people_records() {
 }
 
 void StoreSupervisor::browse_store(Customer *customer) {
-  auto prompt_user_browse_store = []() {
+  auto prompt_user_browse_store = [&customer]() {
     int numInput; 
     while (true) { 
       cout << "Welcome to our store!\nSelect a category:\n";
+      cout << "Current budget: $" << customer->get_budget() << endl;
       cout << "1. Clothing\n2. Drink\n3. Food\n4. Technology\n5. View Cart\n6. Quit\n";
       cin >> numInput;
       if (numInput >=1 && numInput <=6)
@@ -198,13 +199,13 @@ void display_item_info (vector<Item*>items) {
 void add_item_to_customers_cart(int numInput, Customer *customer, Item* i1, Item* i2, Item* i3) {
     switch (numInput) {
     case 1:
-      customer->get_shopping_cart()->add_item(i1); 
+      customer->add_item_to_cart(i1); 
       break;
     case 2:
-      customer->get_shopping_cart()->add_item(i2); 
+      customer->add_item_to_cart(i2); 
       break;    
     case 3:
-      customer->get_shopping_cart()->add_item(i3); 
+      customer->add_item_to_cart(i3); 
       break;
     default:
       break;
@@ -220,6 +221,7 @@ void StoreSupervisor::display_clothing(unordered_map<string,Item*> inventory, Cu
       break;  
   }
 } 
+
 void StoreSupervisor::display_drinks(unordered_map<string,Item*> inventory, Customer *customer) {
   Item *soda = inventory["Soda"], *water = inventory["Water"], *beer = inventory["Beer"]; 
   while (true) { 
@@ -229,6 +231,7 @@ void StoreSupervisor::display_drinks(unordered_map<string,Item*> inventory, Cust
       break;  
   }
 } 
+
 void StoreSupervisor::display_food(unordered_map<string,Item*> inventory, Customer *customer) {
   Item *fruit = inventory["Fruit"], *meat = inventory["Meat"], *vegetables = inventory["Vegetables"]; 
   while (true) { 
