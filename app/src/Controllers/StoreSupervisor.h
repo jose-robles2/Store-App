@@ -174,7 +174,6 @@ bool process_user_input_items_menu(int numInput, Customer *customer, Item*i1, It
     } 
     else if (numInput == 4) {
       customer->view_cart(); 
-      system("pause");
       return true;  
     }
     else if (numInput == 5)
