@@ -3,16 +3,6 @@
 
 void remove_item_wrapper(Customer *customer); 
 
-
-class CampaignDataRoot {
-  object CampaignDataLoad
-    object Campaigns
-      List<>
-        Campaign
-        
-}
-
-
 class AppSupervisor {
   public: 
     AppSupervisor() {

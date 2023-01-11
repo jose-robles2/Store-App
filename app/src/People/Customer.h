@@ -68,6 +68,7 @@ void Customer::remove_item_from_cart(int option) {
 
 void Customer::view_cart() { 
   this->shoppingCart->print_items();
+  system("pause"); 
 }
 
 void Customer::leave_review(unordered_map<string, Person*> people) {

@@ -225,7 +225,7 @@ void StoreSupervisor::display_clothing(unordered_map<string,Item*> inventory, Cu
 void StoreSupervisor::display_drinks(unordered_map<string,Item*> inventory, Customer *customer) {
   Item *soda = inventory["Soda"], *water = inventory["Water"], *beer = inventory["Beer"]; 
   while (true) { 
-    int numInput = prompt_user_items_menu(1, soda, water, beer); 
+    int numInput = prompt_user_items_menu(2, soda, water, beer); 
     bool condition = process_user_input_items_menu(numInput, customer, soda, water, beer);
     if (!condition)
       break;  
@@ -235,7 +235,7 @@ void StoreSupervisor::display_drinks(unordered_map<string,Item*> inventory, Cust
 void StoreSupervisor::display_food(unordered_map<string,Item*> inventory, Customer *customer) {
   Item *fruit = inventory["Fruit"], *meat = inventory["Meat"], *vegetables = inventory["Vegetables"]; 
   while (true) { 
-    int numInput = prompt_user_items_menu(1, fruit, meat, vegetables); 
+    int numInput = prompt_user_items_menu(3, fruit, meat, vegetables); 
     bool condition = process_user_input_items_menu(numInput, customer, fruit, meat, vegetables);
     if (!condition)
       break;  
@@ -245,7 +245,7 @@ void StoreSupervisor::display_food(unordered_map<string,Item*> inventory, Custom
 void StoreSupervisor::display_tech(unordered_map<string,Item*> inventory, Customer *customer) {
   Item *computer = inventory["Computer"], *phone = inventory["Phone"], *television= inventory["Television"]; 
   while (true) { 
-    int numInput = prompt_user_items_menu(1, computer, phone, television); 
+    int numInput = prompt_user_items_menu(4, computer, phone, television); 
     bool condition = process_user_input_items_menu(numInput, customer, computer, phone, television);
     if (!condition)
       break;  
